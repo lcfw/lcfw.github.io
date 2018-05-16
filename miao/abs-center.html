@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>abs-center</title>
+    <style> 
+      *{
+        margin: 0;
+        background-color: rgba(0,0,0,0.1);
+      }
+      section:first-child{
+        width: 200px;
+        display: inline-block;
+        xline-height: 40px;
+        vertical-align: middle;
+        margin-left: calc(50% - 100px);
+      }
+      section:last-child{
+        display:inline-block;
+        line-height: 50vh;
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <section>foo<br />foo</section>
+      <section>???</section>
+    </div>
+  </body>
+</html>
