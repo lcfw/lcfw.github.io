@@ -4,23 +4,21 @@
     <meta charset="UTF-8">
     <title>background-practise</title>
     <style>
-      .sprite section{
+      .icon{
         display: inline-block;
-      }
-      .sprite section:first-child{
         background-image: url(https://www.google.com.hk/images/nav_logo242_hr.png);
+      }
+      .icon-info{
         width: 25px;
         height: 25px;
         background-position: -230px -82px;
       }
-      .sprite section:nth-child(2){
-        background-image: url(https://www.google.com.hk/images/nav_logo242_hr.png);
+      .icon-google{
         width: 184px;
         height: 62px;
         background-position: -4px -86px;
       }
-      .sprite section:last-child{
-        background-image: url(https://www.google.com.hk/images/nav_logo242_hr.png);
+      .icon-loc{
         width: 20px;
         height: 30px;
         background-position: -308px -424px;
@@ -32,13 +30,13 @@
         background-attachment: fixed;
         background-size: 80%;
       }
-      .por section:first-child{
+      .por .porsche1{
         background-image: url(pic/porsche-model1.png);
       }
-      .por section:nth-child(2){
+      .por .porsche2{
         background-image: url(pic/porsche-model2.png);
       }
-      .por section:nth-child(3){
+      .por .porsche3{
         background-image: url(pic/porsche-model3.png);
       }
       
@@ -77,14 +75,14 @@
   </head>
   <body>
     <div class="sprite">
-      <section></section>
-      <section></section>
-      <section></section>
+      <section class="icon icon-info"></section>
+      <section class="icon icon-google"></section>
+      <section class="icon icon-loc"></section>
     </div>
     <div class="por">
-      <section></section>
-      <section></section>
-      <section></section>
+      <section class="porsche1"></section>
+      <section class="porsche2"></section>
+      <section class="porsche3"></section>
     </div>
     <div class="mi"><a href="https://www.mi.com/index.html"></a></div>
     <div class="book">
