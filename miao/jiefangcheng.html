@@ -1,0 +1,41 @@
+<script>
+var a = Number(prompt('输入a'))
+var b = Number(prompt('输入b'))
+var c = Number(prompt('输入c'))
+var bar = b * b - 4 * a * c
+var square
+debugger
+if (bar > 0) {
+    square = Math.sqrt(bar)
+    x1 = (-b + square) / 2 / a
+    x2 = (-b - square) / 2 / a
+    console.log('x1=' + x1, 'x2=' + x2)
+} else if (bar == 0) {
+    x = -b / 2 / a
+    console.log('x=' + x)
+} else {
+    square = Math.sqrt(-bar)
+    x1 = -b / a / 2 + '+' + (square / 2 / a + 'i')
+    x2 = -b / a / 2 + '-' + (square / 2 / a + 'i')
+    console.log('x1=' + x1, 'x2=' + x2)
+}
+</script>
+<script>
+var a1 = Number(prompt('a1='))
+var b1 = Number(prompt('b1='))
+var c1 = Number(prompt('c1='))
+var a2 = Number(prompt('a2='))
+var b2 = Number(prompt('b2='))
+var c2 = Number(prompt('c2='))
+var bar1 = b1 * a2 - b2 * a1
+var bar2 = c1 * a2 - c2 * a1
+if (bar1 == 0 && bar2 == 0) {
+    console.log('无数解')
+} else if (bar1 == 0 && bar2 != 0) {
+    console.log('无解')
+} else {
+    var x = (c1 * a2 - c2 * a1) / (b1 * a2 - b2 * a1)
+    var y = (b1 * c2 - b2 * c1) / (b1 * a2 - b2 * a1)
+    console.log('x=' + x, 'y=' + y)
+}
+</script>
