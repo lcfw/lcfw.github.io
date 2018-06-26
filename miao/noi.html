@@ -1,3 +1,33 @@
+<script id="primes" sample-input="" sample-output="" comment="输出100以内所有的素数">
+  for (var fig = 2; fig <= 100; fig++) {
+    //var fig=2
+    var a = 0
+    for (var i = 2; i < fig; i++) {
+      if (fig % i == 0) {
+        a = 1
+        break
+      }
+    }
+    if (a == 0) {
+      console.log(fig)
+    }
+  }
+</script>
+
+<script id="prime" sample-input="7" sample-output="YES" comment="判断一个数是否为素数">
+  var fig = +prompt('输入数字')
+  var a = 0
+  for (var i = 2; i < fig; i++) {
+    if (fig % i == 0) {
+      a = 1
+      console.log('NO')
+      break
+    }
+  }
+  if (a == 0) {
+    console.log('YES')
+  }
+</script>
 
 <script id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
   var fig = +prompt('输入数字')
