@@ -17,13 +17,5 @@ var lcfw = {
     return result
   }
 
-  difference: function(array, values) {
-    var result = []
-    for (var item of array) {
-      if (!(item in values)) {
-        result.push(item)
-      }
-    }
-    return result
-  }
+
 }
