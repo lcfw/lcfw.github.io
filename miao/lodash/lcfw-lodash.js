@@ -5,7 +5,7 @@ var lcfw = {
       result.push(array.slice(start, end))
     }
     return result
-  }
+  },
 
   compact: function(array) {
     var result = []
@@ -15,7 +15,5 @@ var lcfw = {
       }
     }
     return result
-  }
-
-
+  },
 }
