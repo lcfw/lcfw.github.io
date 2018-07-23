@@ -64,14 +64,25 @@ var lcfw = {
       return ary.slice()
     }
     var result = []
-    ary.forEach(function(item) {
-      if (Array.isArray(item)) {
-        var tmp = this.flattenDepth(ary, depth - 1)
+    for (var i = 0; i < ary.length; i++) {
+      if (Array.isArray(ary[i])) {
+        var tmp = flattenDepth(ary[i], depth - 1)
         result = [...result, ...item]
       } else {
         result = [...result, item]
       }
-    })
+    }
     return result
+  },
+  head: function(array) {
+    return array[0]
+  },
+  indexOf: function(array, value, fromIndex = 0) {
+    for (var i = fromIndex, i < array.length; i++) {
+      if (array[i] == value) {
+        return i
+      }
+    }
+    return -1
   },
 }
