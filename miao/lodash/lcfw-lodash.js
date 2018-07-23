@@ -95,5 +95,21 @@ var lcfw = {
     var arys = [].concat(...arys)
     return result = array.filter(item => arys.includes(item))
   },
+  join: function(array, seperator = ',') {
+    var array = array.map(item => item + seperator)
+    var array = array.reduce((a, b) => a + b)
+    return array.slice(0, array.length - 1)
+  },
+  last: function(array) {
+    return array[array.length - 1]
+  },
+  lastIndexOf: function(array, value, fromIndex = array.length - 1) {
+    for (var i = fromIndex; i >= 0; i--) {
+      if (array[i] == value) {
+        return i
+      }
+    }
+    return -1
+  },
 
 }
