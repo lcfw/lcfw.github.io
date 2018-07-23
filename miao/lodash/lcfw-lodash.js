@@ -67,9 +67,9 @@ var lcfw = {
     for (var i = 0; i < ary.length; i++) {
       if (Array.isArray(ary[i])) {
         var tmp = flattenDepth(ary[i], depth - 1)
-        result = [...result, ...item]
+        result = [...result, ...tmp]
       } else {
-        result = [...result, item]
+        result = [...result, ary[i]]
       }
     }
     return result
@@ -85,4 +85,12 @@ var lcfw = {
     }
     return -1
   },
+  initial: function(array) {
+    return array.slice(0, array.length - 2)
+  },
+  intersection: function(array, ...arys) {
+    var arys = [].concat(...arys)
+    return result = array.filter(item => arys.includes(item))
+  },
+
 }
