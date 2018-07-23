@@ -16,4 +16,35 @@ var lcfw = {
     }
     return result
   },
+  difference: function(array, ...args) {
+    args = [].concat(...args)
+    return array.reduce((result, item) => {
+      if (!args.includes(item)) {
+        result.push(item)
+      }
+      return result
+    }, [])
+  },
+  drop: (array, n = 1) => {
+    return array.filter(item => array.indexOf(item) < n)
+  },
+  dropRight: (array, n = 1) => {
+    return array.filter(item => array.indexOf(item) < (array.length - n))
+  },
+  fill: function(array, value, start = 0, end = array.length) {
+    for (var i = start; i < end) {
+      array[i] = value
+    }
+    return array
+  },
+  flatten: function(array) {
+    return array.reduce(function(prev, index) {
+      if (Array.isArray(item)) {
+        result = [...result, ...item]
+      } else {
+        result = [...result, item]
+      }
+      return result
+    }, [])
+  },
 }
