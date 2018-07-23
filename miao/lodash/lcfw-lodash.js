@@ -111,5 +111,23 @@ var lcfw = {
     }
     return -1
   },
-
+  pull: function(array, ...args) {
+    var args = [].concat(...args)
+    return array.filter(item => args.indexOf(item) == -1)
+  },
+  reverse: function(array) {
+    for (var i = 0; i < array.length; i++) {
+      var item = array.pop()
+      array.splice(i, 0, item)
+    }
+    return array
+  },
+  sortedindex: function(array, value) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] >= value) {
+        return i
+      }
+    }
+    return array.length - 1
+  },
 }
