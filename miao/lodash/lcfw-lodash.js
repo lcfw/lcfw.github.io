@@ -96,9 +96,9 @@ var lcfw = {
     return result = array.filter(item => arys.includes(item))
   },
   join: function(array, seperator = ',') {
-    var array = array.map(item => item + seperator)
-    var array = array.reduce((a, b) => a + b)
-    return array.slice(0, array.length - 1)
+    var array = array.map(item => item + seperator.toString())
+    var str = array.reduce((a, b) => a + b)
+    return str.slice(0, str.length - 1)
   },
   last: function(array) {
     return array[array.length - 1]
