@@ -32,7 +32,7 @@ var lcfw = {
     return array.filter(item => array.indexOf(item) < (array.length - n))
   },
   fill: function(array, value, start = 0, end = array.length) {
-    for (var i = start; i < end) {
+    for (var i = start; i < end; i++) {
       array[i] = value
     }
     return array
