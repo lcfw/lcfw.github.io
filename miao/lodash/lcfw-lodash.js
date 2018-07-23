@@ -78,7 +78,7 @@ var lcfw = {
     return array[0]
   },
   indexOf: function(array, value, fromIndex = 0) {
-    for (var i = fromIndex, i < array.length; i++) {
+    for (var i = fromIndex; i < array.length; i++) {
       if (array[i] == value) {
         return i
       }
