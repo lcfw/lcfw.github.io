@@ -25,6 +25,9 @@ var lcfw = {
       return result
     }, [])
   },
+  differenceBy: function() {
+
+  },
   drop: (array, n = 1) => {
     return array.filter(item => array.indexOf(item) >= n)
   },
@@ -66,7 +69,7 @@ var lcfw = {
     var result = []
     for (var i = 0; i < ary.length; i++) {
       if (Array.isArray(ary[i])) {
-        var tmp = flattenDepth(ary[i], depth - 1)
+        var tmp = this.flattenDepth(ary[i], (depth - 1))
         result = [...result, ...tmp]
       } else {
         result = [...result, ary[i]]
@@ -86,7 +89,7 @@ var lcfw = {
     return -1
   },
   initial: function(array) {
-    return array.slice(0, array.length - 2)
+    return array.slice(0, array.length - 1)
   },
   intersection: function(array, ...arys) {
     var arys = [].concat(...arys)
