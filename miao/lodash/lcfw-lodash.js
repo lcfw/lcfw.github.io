@@ -26,7 +26,7 @@ var lcfw = {
     }, [])
   },
   drop: (array, n = 1) => {
-    return array.filter(item => array.indexOf(item) < n)
+    return array.filter(item => array.indexOf(item) >= n)
   },
   dropRight: (array, n = 1) => {
     return array.filter(item => array.indexOf(item) < (array.length - n))
@@ -38,7 +38,7 @@ var lcfw = {
     return array
   },
   flatten: function(array) {
-    return array.reduce(function(prev, index) {
+    return array.reduce(function(result, item) {
       if (Array.isArray(item)) {
         result = [...result, ...item]
       } else {
