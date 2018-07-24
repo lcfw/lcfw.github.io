@@ -148,4 +148,44 @@ var lcfw = {
     args = args.map(iteratee)
     return array.filter(item => !args.includes(iteratee(item)))
   },
+  differenceWith: function(array, values, comparator) {
+    return array.filter(item => !values.every(it => comparator(it, item)))
+  },
+  iteratee: function(shorthand) {
+    if (typeof shorthand === 'function') {
+      return shorthand
+    } else if (typeof shorthand === 'string') {
+      return this.property(shorthand)
+    } else if (Array.isArray(shorthand)) {
+      return this.matchesProperty(shorthand)
+    } else if (typeof shorthand === 'object') {
+      return this.matches(shorthand)
+    }
+  },
+  matches: function(shorthand) {
+    return function(value) {
+      for (var item in shorthand) {
+        if (shorthand[item] !== value[item]) {
+          return false
+        }
+      }
+      return true
+    }
+  },
+  matchesProperty: function(shorthand) {
+    return function(value) {
+      return value[shorthand[0]] == shorthand[1]
+    }
+  },
+  dropRightWhile: function(array, predicate = identity) {
+    predicate = this.iteratee(predicate)
+
+    for (var i = array.length - 1; i >= 0; i--) {
+      if (predicate(array[i])) {
+        array.pop()
+      } else {
+        return array
+      }
+    }
+  },
 }
