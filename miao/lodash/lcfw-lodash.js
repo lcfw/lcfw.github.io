@@ -25,9 +25,7 @@ var lcfw = {
       return result
     }, [])
   },
-  differenceBy: function() {
 
-  },
   drop: (array, n = 1) => {
     return array.filter(item => array.indexOf(item) >= n)
   },
@@ -122,12 +120,32 @@ var lcfw = {
     }
     return array
   },
-  sortedindex: function(array, value) {
+  sortedIndex: function(array, value) {
     for (var i = 0; i < array.length; i++) {
       if (array[i] >= value) {
         return i
       }
     }
     return array.length - 1
+  },
+  property: function(propName) {
+    return function(obj) {
+      return obj[propName]
+    }
+  },
+  identity: function(v) {
+    return v
+  },
+  differenceBy: function(array, ...args) {
+    args = [].concat(...args)
+    if ((typeof args[args.length - 1]) === 'string') {
+      iteratee = this.property(args.pop())
+    } else if (typeof args[args.length - 1] === 'function') {
+      iteratee = args.pop()
+    } else {
+      iteratee = this.identity
+    }
+    args = args.map(iteratee)
+    return array.filter(item => !args.includes(iteratee(item)))
   },
 }
