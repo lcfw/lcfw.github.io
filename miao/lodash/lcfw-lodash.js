@@ -188,4 +188,23 @@ var lcfw = {
       }
     }
   },
+  assign: function(object, ...obj) {
+    obj = Object.assign({}, ...obj)
+    for (var name in obj) {
+      if (obj.hasOwnProperty(name)) {
+        object[name] = typeof obj[name] === 'object' ? this.assign(object[name], obj[name]) : obj[name]
+      }
+    }
+    return object
+  },
+  forOwn: function(object, iteratee) {
+    for (var name in object) {
+      if (object.hasOwnProperty(name)) {
+        typeof object[name] === 'object' ? this.forOwn(object[name], iteratee) : iteratee(object[name], name, object)
+      }
+    }
+  },
+  forOwnRight: function(object, iteratee) {
+    Object.keys(object).reverse().map(name => typeof object[name] === 'object' ? this.forOwnRight(object[name], iteratee) : iteratee(object[name], name, object))
+  },
 }
