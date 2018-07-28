@@ -158,9 +158,7 @@ var lcfw = {
     } else {
       iteratee = this.identity
     }
-    return arrs.filter(item => {
-      return this.intersection(ary.map(x => iteratee(x)), iteratee(item)).length != 0
-    })
+    return ary.filter(item => arrs.map(x => iteratee(x)).includes(iteratee(item)))
   },
   intersectionWith: function(ary, arrs) {
     arrs = [].concat(...arrs)
