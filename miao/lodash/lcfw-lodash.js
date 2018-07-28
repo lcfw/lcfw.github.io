@@ -6,7 +6,6 @@ var lcfw = {
     }
     return result
   },
-
   compact: function(array) {
     var result = []
     for (var item of array) {
@@ -25,18 +24,69 @@ var lcfw = {
       return result
     }, [])
   },
-
+  differenceBy: function(array, ...args) {
+    args = [].concat(...args)
+    if ((typeof args[args.length - 1]) === 'string') {
+      iteratee = this.property(args.pop())
+    } else if (typeof args[args.length - 1] === 'function') {
+      iteratee = args.pop()
+    } else {
+      iteratee = this.identity
+    }
+    args = args.map(iteratee)
+    return array.filter(item => !args.includes(iteratee(item)))
+  },
+  differenceWith: function(array, values, comparator) {
+    return array.filter(item => !values.every(it => comparator(it, item)))
+  },
   drop: (array, n = 1) => {
     return array.filter(item => array.indexOf(item) >= n)
   },
   dropRight: (array, n = 1) => {
     return array.filter(item => array.indexOf(item) < (array.length - n))
   },
+  dropRightWhile: function(array, predicate = identity) {
+    predicate = this.iteratee(predicate)
+
+    for (var i = array.length - 1; i >= 0; i--) {
+      if (predicate(array[i])) {
+        array.pop()
+      } else {
+        return array
+      }
+    }
+  },
+  dropWhile: function(arr, predicate = identity) {
+    predicate = this.iteratee(predicate)
+    for (var i in arr) {
+      if (!predicate(arr[i])) {
+        return arr.slice(i)
+      }
+    }
+  },
   fill: function(array, value, start = 0, end = array.length) {
     for (var i = start; i < end; i++) {
       array[i] = value
     }
     return array
+  },
+  findIndex: function(arr, predicate = identity, fromIndex = 0) {
+    predicate = this.iteratee(predicate)
+    for (var i = fromIndex; i < arr.length; i++) {
+      if (predicate(arr[i])) {
+        return i
+      }
+    }
+    return -1
+  },
+  findLastIndex: function(arr, predicate = identity, fromIndex = arr.length - 1) {
+    predicate = this.iteratee(predicate)
+    for (var i = fromIndex; i >= 0; i--) {
+      if (predicate(arr[i])) {
+        return i
+      }
+    }
+    return -1
   },
   flatten: function(array) {
     return array.reduce(function(result, item) {
@@ -75,6 +125,12 @@ var lcfw = {
     }
     return result
   },
+  fromPairs: pairs => {
+    return pairs.reduce((result, item) => {
+      result[item[0]] = item[1]
+      return result
+    }, {})
+  },
   head: function(array) {
     return array[0]
   },
@@ -93,6 +149,32 @@ var lcfw = {
     var arys = [].concat(...arys)
     return result = array.filter(item => arys.includes(item))
   },
+  intersectionBy: function(ary, ...arrs) {
+    arrs = [].concat(...arrs)
+    if ((typeof arrs[arrs.length - 1]) === 'string') {
+      iteratee = this.property(arrs.pop())
+    } else if (typeof arrs[arrs.length - 1] === 'function') {
+      iteratee = arrs.pop()
+    } else {
+      iteratee = this.identity
+    }
+    return arrs.filter(item => {
+      return this.intersection(ary.map(x => iteratee(x)), iteratee(item)).length != 0
+    })
+  },
+  intersectionWith: function(ary, arrs) {
+    arrs = [].concat(...arrs)
+    if ((typeof arrs[arrs.length - 1]) === 'string') {
+      comp = this.property(arrs.pop())
+    } else if (typeof arrs[arrs.length - 1] === 'function') {
+      comp = arrs.pop()
+    } else {
+      comp = this.identity
+    }
+    return ary.filter(item1 => {
+      return arrs.filter(item2 => comp(item1, item2))
+    })
+  },
   join: function(array, seperator = ',') {
     var array = array.map(item => item + seperator.toString())
     var str = array.reduce((a, b) => a + b)
@@ -109,9 +191,21 @@ var lcfw = {
     }
     return -1
   },
+  nth: function() {
+
+  },
   pull: function(array, ...args) {
     var args = [].concat(...args)
     return array.filter(item => args.indexOf(item) == -1)
+  },
+  pullAll: function() {
+
+  },
+  pullAllBy: function() {
+
+  },
+  pullAllWith: function() {
+
   },
   reverse: function(array) {
     for (var i = 0; i < array.length; i++) {
@@ -128,6 +222,12 @@ var lcfw = {
     }
     return array.length - 1
   },
+  sortedIndexBy: function() {
+
+  },
+
+
+
   property: function(propName) {
     return function(obj) {
       return obj[propName]
@@ -136,21 +236,7 @@ var lcfw = {
   identity: function(v) {
     return v
   },
-  differenceBy: function(array, ...args) {
-    args = [].concat(...args)
-    if ((typeof args[args.length - 1]) === 'string') {
-      iteratee = this.property(args.pop())
-    } else if (typeof args[args.length - 1] === 'function') {
-      iteratee = args.pop()
-    } else {
-      iteratee = this.identity
-    }
-    args = args.map(iteratee)
-    return array.filter(item => !args.includes(iteratee(item)))
-  },
-  differenceWith: function(array, values, comparator) {
-    return array.filter(item => !values.every(it => comparator(it, item)))
-  },
+
   iteratee: function(shorthand) {
     if (typeof shorthand === 'function') {
       return shorthand
@@ -177,49 +263,7 @@ var lcfw = {
       return value[shorthand[0]] == shorthand[1]
     }
   },
-  dropRightWhile: function(array, predicate = identity) {
-    predicate = this.iteratee(predicate)
 
-    for (var i = array.length - 1; i >= 0; i--) {
-      if (predicate(array[i])) {
-        array.pop()
-      } else {
-        return array
-      }
-    }
-  },
-  dropWhile: function(arr, predicate = identity) {
-    predicate = this.iteratee(predicate)
-    for (var i in arr) {
-      if (!predicate(arr[i])) {
-        return arr.slice(i)
-      }
-    }
-  },
-  findIndex: function(arr, predicate = identity, fromIndex = 0) {
-    predicate = this.iteratee(predicate)
-    for (var i = fromIndex; i < arr.length; i++) {
-      if (predicate(arr[i])) {
-        return i
-      }
-    }
-    return -1
-  },
-  findLastIndex: function(arr, predicate = identity, fromIndex = arr.length - 1) {
-    predicate = this.iteratee(predicate)
-    for (var i = fromIndex; i >= 0; i--) {
-      if (predicate(arr[i])) {
-        return i
-      }
-    }
-    return -1
-  },
-  fromPairs: pairs => {
-    return pairs.reduce((result, item) => {
-      result[item[0]] = item[1]
-      return result
-    }, {})
-  },
 
 
   assign: function(object, ...obj) {
