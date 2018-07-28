@@ -217,7 +217,7 @@ var lcfw = {
     iteratee = this.iteratee(iteratee)
     var values = values.map(val => iteratee(val))
     for (var i = 0; i < array.length; i++) {
-      if (values.includes(array[i])) {
+      if (values.includes(iteratee(array[i]))) {
         array.splice(i, 1)
         i--
       }
