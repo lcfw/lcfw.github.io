@@ -172,7 +172,9 @@ var lcfw = {
       comp = this.identity
     }
     return ary.filter(item1 => {
-      return arrs.filter(item2 => comp(item1, item2))
+      return arrs.filter(item2 => {
+        return comp(item1, item2)
+      }).length != 0
     })
   },
   join: function(array, seperator = ',') {
@@ -191,22 +193,22 @@ var lcfw = {
     }
     return -1
   },
-  nth: function() {
+  // nth: function() {
 
-  },
+  // },
   pull: function(array, ...args) {
     var args = [].concat(...args)
     return array.filter(item => args.indexOf(item) == -1)
   },
-  pullAll: function() {
+  // pullAll: function() {
 
-  },
-  pullAllBy: function() {
+  // },
+  // pullAllBy: function() {
 
-  },
-  pullAllWith: function() {
+  // },
+  // pullAllWith: function() {
 
-  },
+  // },
   reverse: function(array) {
     for (var i = 0; i < array.length; i++) {
       var item = array.pop()
@@ -222,9 +224,9 @@ var lcfw = {
     }
     return array.length - 1
   },
-  sortedIndexBy: function() {
+  // sortedIndexBy: function() {
 
-  },
+  // },
 
 
 
