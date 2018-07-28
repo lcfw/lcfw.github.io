@@ -283,63 +283,76 @@ var lcfw = {
     }, ary)
     return arr
   },
-  unionWith: function() {
-
+  unionWith: function(arr, ...arrs) {
+    arrs = [].concat(...arrs)
+    if ((typeof arrs[arrs.length - 1]) === 'string') {
+      comp = this.property(arrs.pop())
+    } else if (typeof arrs[arrs.length - 1] === 'function') {
+      comp = arrs.pop()
+    } else {
+      comp = this.identity
+    }
+    return arrs.reduce((result, item1) => {
+      if (arr.every(item2 => !comp(item1, item2))) {
+        result = [...result, item1]
+      }
+      return result
+    }, arr)
   },
-  uniq: function() {
+  // uniq: function() {
 
-  },
-  uniqBy: function() {
+  // },
+  // uniqBy: function() {
 
-  },
-  uniqWith: function() {
+  // },
+  // uniqWith: function() {
 
-  },
-  unzip: function() {
+  // },
+  // unzip: function() {
 
-  },
-  unzipWith: function() {
+  // },
+  // unzipWith: function() {
 
-  },
-  without: function() {
+  // },
+  // without: function() {
 
-  },
-  xor: function() {
+  // },
+  // xor: function() {
 
-  },
-  xorBy: function() {
+  // },
+  // xorBy: function() {
 
-  },
-  xorWith: function() {
+  // },
+  // xorWith: function() {
 
-  },
-  zip: function() {
+  // },
+  // zip: function() {
 
-  },
+  // },
 
 
 
-  countBy: function() {
+  // countBy: function() {
 
-  },
-  every: function() {
+  // },
+  // every: function() {
 
-  },
-  filter: function() {
+  // },
+  // filter: function() {
 
-  },
-  find: function() {
+  // },
+  // find: function() {
 
-  },
-  findLast: function() {
+  // },
+  // findLast: function() {
 
-  },
-  flatMap: function() {
+  // },
+  // flatMap: function() {
 
-  },
-  flatMapDeep: function() {
+  // },
+  // flatMapDeep: function() {
 
-  },
+  // },
 
 
 
@@ -388,22 +401,19 @@ var lcfw = {
     } else if (Array.isArray(value) && Array.isArray(other)) {
       if (value.toString() === other.toString()) {
         return true
-      } else {
-        return false
       }
     } else if ((typeof value === 'object') && (typeof other === 'object')) {
       if (Object.keys(value).length === Object.keys(other).length) {
         for (item in value) {
-          return lcfw.isEqual(value[item], other[item])
+          if (!lcfw.isEqual(value[item], other[item])) {
+            return false
+          }
         }
-      } else {
-        return false
+        return true
       }
-    } else {
-      return false
     }
+    return false
   },
-
 
   assign: function(object, ...obj) {
     obj = Object.assign({}, ...obj)
