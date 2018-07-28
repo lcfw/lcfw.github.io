@@ -214,11 +214,11 @@ var lcfw = {
     }
     return -1
   },
-  fromPairs: function(pairs) {
+  fromPairs: pairs => {
     return pairs.reduce((result, item) => {
       result[item[0]] = item[1]
       return result
-    }, [])
+    }, {})
   },
 
 
