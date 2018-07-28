@@ -188,9 +188,22 @@ var lcfw = {
       }
     }
   },
-  dropWhile: function(array, predicate = identity) {
+  dropWhile: function(arr, predicate = identity) {
     predicate = this.iteratee(predicate)
-    return array.filter(obj => !predicate(obj))
+    for (var i in arr) {
+      if (!predicate(arr[i])) {
+        return arr.slice(i)
+      }
+    }
+  },
+  findIndex: function(arr, predicate = identity, fromIndex = 0) {
+    predicate = this.iteratee(predicate)
+    for (var i = fromIndex; i < arr.length; i++) {
+      if (predicate(arr[i])) {
+        return i
+      }
+    }
+    return -1
   },
   assign: function(object, ...obj) {
     obj = Object.assign({}, ...obj)
