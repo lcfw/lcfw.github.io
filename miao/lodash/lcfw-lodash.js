@@ -251,9 +251,95 @@ var lcfw = {
     }
     return array.length - 1
   },
-  // sortedIndexBy: function() {
 
-  // },
+
+
+  union: function(...arrs) {
+    arrs = [].concat(...arrs)
+    return arrs.reduce((result, item) => {
+      if (!result.includes(item)) {
+        result = [...result, item]
+      }
+      return result
+    }, [])
+  },
+  unionBy: function(arr, ...arrs) {
+    arrs = [].concat(...arrs)
+    if ((typeof arrs[arrs.length - 1]) === 'string') {
+      iteratee = this.property(arrs.pop())
+    } else if (typeof arrs[arrs.length - 1] === 'function') {
+      iteratee = arrs.pop()
+    } else {
+      iteratee = this.identity
+    }
+    var ary = arr.map(item => iteratee(item))
+    var arr = arr.slice()
+    arrs.reduce((result, item) => {
+      if (!result.includes(iteratee(item))) {
+        result = [...result, item]
+        arr.push(item)
+      }
+      return result
+    }, ary)
+    return arr
+  },
+  unionWith: function() {
+
+  },
+  uniq: function() {
+
+  },
+  uniqBy: function() {
+
+  },
+  uniqWith: function() {
+
+  },
+  unzip: function() {
+
+  },
+  unzipWith: function() {
+
+  },
+  without: function() {
+
+  },
+  xor: function() {
+
+  },
+  xorBy: function() {
+
+  },
+  xorWith: function() {
+
+  },
+  zip: function() {
+
+  },
+
+
+
+  countBy: function() {
+
+  },
+  every: function() {
+
+  },
+  filter: function() {
+
+  },
+  find: function() {
+
+  },
+  findLast: function() {
+
+  },
+  flatMap: function() {
+
+  },
+  flatMapDeep: function() {
+
+  },
 
 
 
