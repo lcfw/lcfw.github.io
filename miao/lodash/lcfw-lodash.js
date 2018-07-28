@@ -160,7 +160,7 @@ var lcfw = {
     }
     return ary.filter(item => arrs.map(x => iteratee(x)).includes(iteratee(item)))
   },
-  intersectionWith: function(ary, arrs) {
+  intersectionWith: function(ary, ...arrs) {
     arrs = [].concat(...arrs)
     if ((typeof arrs[arrs.length - 1]) === 'string') {
       comp = this.property(arrs.pop())
@@ -264,6 +264,30 @@ var lcfw = {
     }
   },
 
+
+  isEqual: function(value, other) {
+    if (value === other) {
+      return true
+    } else if ((value !== value) && (other !== other)) {
+      return true
+    } else if (Array.isArray(value) && Array.isArray(other)) {
+      if (value.toString() === other.toString()) {
+        return true
+      } else {
+        return false
+      }
+    } else if ((typeof value === 'object') && (typeof other === 'object')) {
+      if (Object.keys(value).length === Object.keys(other).length) {
+        for (item in value) {
+          return lcfw.isEqual(value[item], other[item])
+        }
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+  },
 
 
   assign: function(object, ...obj) {
