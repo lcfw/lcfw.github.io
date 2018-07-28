@@ -299,15 +299,34 @@ var lcfw = {
       return result
     }, arr)
   },
-  // uniq: function() {
-
-  // },
-  // uniqBy: function() {
-
-  // },
-  // uniqWith: function() {
-
-  // },
+  uniq: function(array) {
+    return array.reduce((result, item) => {
+      if (!result.includes(item)) {
+        result = [...result, item]
+      }
+      return result
+    }, [])
+  },
+  uniqBy: function(array, iteratee = identity) {
+    iteratee = this.iteratee(iteratee)
+    var arr = []
+    return array.reduce((result, item) => {
+      if (!arr.includes(iteratee(item))) {
+        arr.push(iteratee(item))
+        result = [...result, item]
+      }
+      return result
+    }, [])
+  },
+  uniqWith: function(array, comp) {
+    var ary = [].concat(array.shift())
+    return array.reduce((result, item1) => {
+      if (!result.some(item2 => comp(item1, item2))) {
+        result = [...result, item1]
+      }
+      return result
+    }, ary)
+  },
   // unzip: function() {
 
   // },
