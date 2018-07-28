@@ -327,15 +327,16 @@ var lcfw = {
       return result
     }, ary)
   },
-  // unzip: function() {
+  unzip: function() {
 
-  // },
+  },
   // unzipWith: function() {
 
   // },
-  // without: function() {
-
-  // },
+  without: function(array, ...values) {
+    values = [...values]
+    return array.filter(item => !values.includes(item))
+  },
   // xor: function() {
 
   // },
