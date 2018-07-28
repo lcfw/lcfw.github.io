@@ -188,9 +188,9 @@ var lcfw = {
       }
     }
   },
-  dropWhile: (array, predicate = identity) => {
+  dropWhile: function(array, predicate = identity) {
     predicate = this.iteratee(predicate)
-    array.filter(!predicate(obj))
+    return array.filter(obj => !predicate(obj))
   },
   assign: function(object, ...obj) {
     obj = Object.assign({}, ...obj)
