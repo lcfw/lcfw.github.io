@@ -205,6 +205,23 @@ var lcfw = {
     }
     return -1
   },
+  findLastIndex: function(arr, predicate = identity, fromIndex = arr.length - 1) {
+    predicate = this.iteratee(predicate)
+    for (var i = fromIndex; i >= 0; i--) {
+      if (predicate(arr[i])) {
+        return i
+      }
+    }
+    return -1
+  },
+  fromPairs: pairs => {
+    return pairs.reduce((result, item) => {
+      result[item[0]] = item[1]
+      return result
+    }, [])
+  },
+
+
   assign: function(object, ...obj) {
     obj = Object.assign({}, ...obj)
     for (var name in obj) {
