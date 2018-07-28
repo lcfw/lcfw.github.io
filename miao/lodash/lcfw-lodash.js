@@ -191,22 +191,51 @@ var lcfw = {
     }
     return -1
   },
-  // nth: function() {
-
-  // },
+  nth: function(array, n = 0) {
+    return n >= 0 ? array[n] : array[n + array.length]
+  },
   pull: function(array, ...args) {
     var args = [].concat(...args)
-    return array.filter(item => args.indexOf(item) == -1)
+    for (var i = 0; i < array.length; i++) {
+      if (args.includes(array[i])) {
+        array.splice(i, 1)
+        i--
+      }
+    }
+    return array
   },
-  // pullAll: function() {
-
-  // },
-  // pullAllBy: function() {
-
-  // },
-  // pullAllWith: function() {
-
-  // },
+  pullAll: function(array, values) {
+    for (var i = 0; i < array.length; i++) {
+      if (values.includes(array[i])) {
+        array.splice(i, 1)
+        i--
+      }
+    }
+    return array
+  },
+  pullAllBy: function(array, values, iteratee = identity) {
+    iteratee = this.iteratee(iteratee)
+    var values = values.map(val => iteratee(val))
+    for (var i = 0; i < array.length; i++) {
+      if (values.includes(array[i])) {
+        array.splice(i, 1)
+        i--
+      }
+    }
+    return array
+  },
+  pullAllWith: function(array, values, comp) {
+    for (var i = 0; i < array.length; i++) {
+      for (var j = 0; j < values.length; j++) {
+        if (comp(array[i], values[j])) {
+          array.splice(i, 1)
+          i--
+          break
+        }
+      }
+    }
+    return array
+  },
   reverse: function(array) {
     for (var i = 0; i < array.length; i++) {
       var item = array.pop()
