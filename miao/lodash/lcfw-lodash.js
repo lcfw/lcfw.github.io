@@ -327,9 +327,9 @@ var lcfw = {
       return result
     }, ary)
   },
-  unzip: function() {
+  // unzip: function() {
 
-  },
+  // },
   // unzipWith: function() {
 
   // },
@@ -337,9 +337,11 @@ var lcfw = {
     values = [...values]
     return array.filter(item => !values.includes(item))
   },
-  // xor: function() {
-
-  // },
+  xor: function(...arys) {
+    return arys.reduce(function(result, item) {
+      return result = [...result, ...item.filter(item1 => !result.includes(item1))]
+    }, [])
+  },
   // xorBy: function() {
 
   // },
