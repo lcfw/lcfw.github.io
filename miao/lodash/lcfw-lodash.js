@@ -455,8 +455,14 @@ var lcfw = {
   },
   // invokeMap:function(){
   // },
-  // keyBy:function(){
-  // },
+  keyBy: function(collection, iteratee = identity) {
+    iteratee = this.iteratee(iteratee)
+    return collection.reduce((result, item) => {
+      result[iteratee(item)] = result[iteratee(item)] || {}
+      Object.assign(result[iteratee(item)], item)
+      return result
+    }, {})
+  },
   // map:function(){
   // },
   // orderBy:function(){
