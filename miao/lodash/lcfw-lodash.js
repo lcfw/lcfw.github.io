@@ -313,15 +313,9 @@ var lcfw = {
     iteratee = this.iteratee(iteratee)
     return array.filter((item, index) => iteratee(item) != iteratee(array[index - 1]))
   },
-  // tail: function() {
-
-  // },
-  // take: function() {
-
-  // },
-  // takeRight: function() {
-
-  // },
+  tail: array => array.slice(1),
+  take: (array, n = 1) => array.slice(0, n),
+  takeRight: (array, n = 1) => array.slice(array.length - n, array.length),
   // takeRightWhile: function() {
 
   // },
