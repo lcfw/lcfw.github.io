@@ -411,14 +411,15 @@ var lcfw = {
       }
     }
   },
-  // flatMap: function() {
-
-  // },
-  // flatMapDeep: function() {
-
-  // },
-  // flatMapDepth:function(){
-  // },
+  flatMap: function(collection, iteratee = identity) {
+    return lcfw.flatten(collection.map(item => iteratee(item)))
+  },
+  flatMapDeep: function(collection, iteratee = identity) {
+    return lcfw.flattenDeep(collection.map(item => iteratee(item)))
+  },
+  flatMapDepth: function(collection, iteratee = identity, depth = 1) {
+    return lcfw.flattenDepth(collection.map(item => iteratee(item)), depth)
+  },
   // forEach: function(){
   // },
   // forEachRight: function(){
