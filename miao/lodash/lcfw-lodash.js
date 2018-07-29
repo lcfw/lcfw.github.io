@@ -756,26 +756,39 @@ var lcfw = {
   floor: (number, precision = 0) => Math.floor(number * (10 ** precision)) / (10 ** precision),
   max: function(array) {
     if (array.length != 0) {
-      array.reduce((result, item) => {
-        result > item ? result = item : result = result
+      return array.reduce((result, item) => {
+        result = (item > result) ? item : result
         return result
       }, -Infinity)
     }
     return undefined
   },
   maxBy: function(array, iteratee = identity) {
-
+    iteratee = this.iteratee(iteratee)
+    if (array.length != 0) {
+      return array.reduce((result, item) => {
+        result = (iteratee(item) > iteratee(result)) ? item : result
+        return result
+      })
+    }
+    return undefined
   },
 
 
 
-  sum: function() {
-
+  sum: function(array) {
+    return array.reduce((result, item) => {
+      result += item
+      return result
+    }, 0)
   },
-  sumBy: function() {
-
+  sumBy: function(array, iteratee = identity) {
+    iteratee = this.iteratee(iteratee)
+    return array.reduce((result, item) => {
+      result += iteratee(item)
+      return result
+    }, 0)
   },
-
 
 
   identity: function(v) {
