@@ -267,7 +267,7 @@ var lcfw = {
       var cha = Math.floor((sma + big) / 2)
       array[cha] >= value ? big = cha : sma = cha
       if (array[cha - 1] < value) {
-        return cha - 1
+        return cha
       } else {
         return bin(sma, big)
       }
