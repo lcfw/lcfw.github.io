@@ -315,7 +315,12 @@ var lcfw = {
   },
   tail: array => array.slice(1),
   take: (array, n = 1) => array.slice(0, n),
-  takeRight: (array, n = 1) => array.slice(array.length - n, array.length),
+  takeRight: (array, n = 1) => {
+    if (n > array.length) {
+      n = array.length
+    }
+    array.slice(array.length - n, array.length)
+  },
   takeRightWhile: function(array, predicate = identity) {
     predicate = this.iteratee(predicate)
     for (var i = array.length - 1; i >= 0; i--) {
@@ -328,7 +333,7 @@ var lcfw = {
     predicate = this.iteratee(predicate)
     for (var i in array) {
       if (!predicate(array[i])) {
-        return array.slice(0, i - 1)
+        return array.slice(0, i)
       }
     }
   },
