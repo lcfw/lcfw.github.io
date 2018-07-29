@@ -282,12 +282,30 @@ var lcfw = {
     }
     return 0
   },
-  // sortedLastIndexBy: function() {
+  sortedLastIndexBy: function(array, value, iteratee = identity) {
+    iteratee = this.iteratee(iteratee)
+    for (var i = array.length - 1; i >= 0; i--) {
+      if (iteratee(array[i]) <= iteratee(value)) {
+        return i + 1
+      }
+    }
+    return 0
+  },
+  sortedLastIndexOf: function(array, value) {
+    var sma = 0
+    var big = array.length - 1
 
-  // },
-  // sortedLastIndexOf: function() {
-
-  // },
+    function bin(sma, big) {
+      var cha = Math.floor((sma + big) / 2)
+      array[cha] <= value ? sma = cha : big = cha
+      if (array[cha + 1] > value) {
+        return cha
+      } else {
+        return bin(sma, big)
+      }
+    }
+    return bin(sma, big)
+  },
   // sortedUniq: function() {
 
   // },
