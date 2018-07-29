@@ -319,7 +319,7 @@ var lcfw = {
     if (n > array.length) {
       n = array.length
     }
-    array.slice(array.length - n, array.length)
+    return array.slice(array.length - n, array.length)
   },
   takeRightWhile: function(array, predicate = identity) {
     predicate = this.iteratee(predicate)
