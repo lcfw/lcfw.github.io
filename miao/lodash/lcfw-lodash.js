@@ -433,6 +433,7 @@ var lcfw = {
     return collection
   },
   groupBy: function(collection, iteratee = identity) {
+    iteratee = this.iteratee(iteratee)
     var result = {}
     collection.forEach(item => {
       result[iteratee(item)] = result[iteratee(item)] || []
