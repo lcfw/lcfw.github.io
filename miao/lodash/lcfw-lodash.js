@@ -354,9 +354,19 @@ var lcfw = {
     var arys = arrs.map(item => iteratee(item))
     return arrs.filter(item => arys.lastIndexOf(iteratee(item)) == arys.indexOf(iteratee(item)))
   },
-  // xorWith: function() {
-
-  // },
+  xorWith: function(array, other, comp) {
+    array = [...array, ...other]
+    var arr
+    var result = []
+    for (var i in array) {
+      arr = array.slice()
+      arr.splice(i, 1)
+      if (arr.every(item => !comp(item, array[i]))) {
+        result = [...result, array[i]]
+      }
+    }
+    return result
+  },
   // zip: function() {
 
   // },
