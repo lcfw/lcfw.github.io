@@ -505,6 +505,9 @@ var lcfw = {
   // 
   isArguments: value => Object.prototype.toString.call(value) === '[object Arguments]',
   isArray: value => Array.isArray(value),
+
+
+
   isBoolean: value => Object.prototype.toString.call(value) === '[object Boolean]',
   isDate: value => Object.prototype.toString.call(value) === '[object Date]',
   // isElement: function() {
@@ -572,6 +575,25 @@ var lcfw = {
     }
     return false
   },
+
+
+  isError: value =>
+    Object.prototype.toString.call(value) === "[object Error]",
+
+
+
+  isFunction: value =>
+    Object.prototype.toString.call(value) === "[object Function]",
+
+
+
+  isString: value => typeof value === 'string',
+
+
+
+  isUndefined: value =>
+    Object.prototype.toString.call(value) === "[object Undefined]",
+
 
   assign: function(object, ...obj) {
     obj = Object.assign({}, ...obj)
