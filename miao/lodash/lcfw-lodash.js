@@ -274,9 +274,14 @@ var lcfw = {
     }
     return bin(sma, big)
   },
-  // sortedLastIndex: function() {
-
-  // },
+  sortedLastIndex: function(array, value) {
+    for (var i = array.length - 1; i >= 0; i--) {
+      if (array[i] <= value) {
+        return i + 1
+      }
+    }
+    return 0
+  },
   // sortedLastIndexBy: function() {
 
   // },
