@@ -376,12 +376,25 @@ var lcfw = {
   // countBy: function() {
 
   // },
-  // every: function() {
-
-  // },
-  // filter: function() {
-
-  // },
+  every: function(collection, predicate = identity) {
+    predicate = this.iteratee(predicate)
+    for (item of collection) {
+      if (!predicate(item)) {
+        return false
+      }
+    }
+    return true
+  },
+  filter: function(collection, predicate = identity) {
+    predicate = this.iteratee(predicate)
+    var result = []
+    for (i in collection) {
+      if (predicate(collection[i], i, collection)) {
+        result.push(collection[i])
+      }
+    }
+    return result
+  },
   // find: function() {
 
   // },
@@ -394,6 +407,15 @@ var lcfw = {
   // flatMapDeep: function() {
 
   // },
+  // forEach: function(){
+  // },
+  // forEachRight: function(){
+  // },
+  // groupBy:function(){
+  // },
+  // includes:function(){
+  // },
+  // 
 
 
 
