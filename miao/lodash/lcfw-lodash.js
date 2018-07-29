@@ -306,12 +306,13 @@ var lcfw = {
     }
     return bin(sma, big)
   },
-  // sortedUniq: function() {
-
-  // },
-  // sortedUniqBy: function() {
-
-  // },
+  sortedUniq: array => {
+    return array.filter((item, index) => item != array[index - 1])
+  },
+  sortedUniqBy: function(array, iteratee) {
+    iteratee = this.iteratee(iteratee)
+    return array.filter((item, index) => iteratee(item) != iteratee(array[index - 1]))
+  },
   // tail: function() {
 
   // },
