@@ -341,9 +341,19 @@ var lcfw = {
     arys = [].concat(...arys)
     return arys.filter(item => arys.lastIndexOf(item) == arys.indexOf(item))
   },
-  // xorBy: function() {
+  xorBy: function(...arrs) {
+    arrs = [].concat(...arrs)
+    if ((typeof arrs[arrs.length - 1]) === 'string') {
+      var iteratee = this.property(arrs.pop())
+    } else if (typeof arrs[arrs.length - 1] === 'function') {
+      var iteratee = arrs.pop()
+    } else {
+      var iteratee = this.identity
+    }
 
-  // },
+    var arys = arrs.map(item => iteratee(item))
+    return arrs.filter(item => arys.lastIndexOf(iteratee(item)) == arys.indexOf(iteratee(item)))
+  },
   // xorWith: function() {
 
   // },
