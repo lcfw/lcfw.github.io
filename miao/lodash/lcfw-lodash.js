@@ -420,10 +420,17 @@ var lcfw = {
   flatMapDepth: function(collection, iteratee = identity, depth = 1) {
     return lcfw.flattenDepth(collection.map(item => iteratee(item)), depth)
   },
-  // forEach: function(){
-  // },
-  // forEachRight: function(){
-  // },
+  forEach: function(collection, iteratee = identity) {
+    for (var i in collection) {
+      iteratee(collection[i], i, collection)
+    }
+  },
+  forEachRight: function(collection, iteratee = identity) {
+    for (var i = collection.length; i >= 0; i--) {
+      iteratee(collection[i], i, collection)
+    }
+
+  },
   // groupBy:function(){
   // },
   // includes:function(){
