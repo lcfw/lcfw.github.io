@@ -424,12 +424,13 @@ var lcfw = {
     for (var i in collection) {
       iteratee(collection[i], i, collection)
     }
+    return collection
   },
   forEachRight: function(collection, iteratee = identity) {
     for (var i = collection.length; i >= 0; i--) {
       iteratee(collection[i], i, collection)
     }
-
+    return collection
   },
   groupBy: function(collection, iteratee = identity) {
     var result = {}
