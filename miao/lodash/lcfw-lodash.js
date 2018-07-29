@@ -431,10 +431,26 @@ var lcfw = {
     }
 
   },
-  // groupBy:function(){
-  // },
-  // includes:function(){
-  // },
+  groupBy: function(collection, iteratee = identity) {
+    var result = {}
+    collection.forEach(item => {
+      result[iteratee(item)] = result[iteratee(item)] || []
+      result[iteratee(item)].push(item)
+    })
+    return result
+  },
+  includes: function(collection, value, fromIndex = 0) {
+    for (var i = fromIndex;; i++) {
+      if (Array.isArray(collection)) {
+        return collection.slice(i).includes(value)
+      } else if (typeof collection == 'object') {
+        return Object.values(collection).includes(value)
+
+      } else if (typeof collection == 'string') {
+        return collection.includes(value)
+      }
+    }
+  },
   // invokeMap:function(){
   // },
   // keyBy:function(){
