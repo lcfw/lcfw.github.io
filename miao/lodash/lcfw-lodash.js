@@ -456,9 +456,13 @@ var lcfw = {
 
 
 
-  // countBy: function() {
-
-  // },
+  countBy: function(collection, iteratee = identity) {
+    iteratee = this.iteratee(iteratee)
+    return collection.reduce((result, item) => {
+      result[iteratee(item)] = (result[iteratee(item)] || 0) + 1
+      return result
+    }, {})
+  },
   every: function(collection, predicate = identity) {
     predicate = this.iteratee(predicate)
     for (item of collection) {
