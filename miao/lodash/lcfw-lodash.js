@@ -395,17 +395,29 @@ var lcfw = {
     }
     return result
   },
-  // find: function() {
-
-  // },
-  // findLast: function() {
-
-  // },
+  find: function(collection, predicate = identity, fromIndex = 0) {
+    predicate = this.iteratee(predicate)
+    for (var i = fromIndex; i < collection.length; i++) {
+      if (predicate(collection[i])) {
+        return collection[i]
+      }
+    }
+  },
+  findLast: function(collection, predicate = identity, fromIndex = collection.length - 1) {
+    predicate = this.iteratee(predicate)
+    for (var i = fromIndex; i >= 0; i--) {
+      if (predicate(collection[i])) {
+        return collection[i]
+      }
+    }
+  },
   // flatMap: function() {
 
   // },
   // flatMapDeep: function() {
 
+  // },
+  // flatMapDepth:function(){
   // },
   // forEach: function(){
   // },
@@ -415,9 +427,62 @@ var lcfw = {
   // },
   // includes:function(){
   // },
+  // invokeMap:function(){
+  // },
+  // keyBy:function(){
+  // },
+  // map:function(){
+  // },
+  // orderBy:function(){
+  // },
+  // partition:function(){
+  // },
+  // reduce:function(){
+  // },
+  // reduceRight:function(){
+  // },
+  // reject:function(){
+  // },
+  // sample:function(){
+  // },
+  // sampleSize:function(){
+  // },
+  // shuffle:function(){
+  // },
+  // size:function(){
+  // },
+  // some:function(){
+  // },
+  // sortBy:function(){
+  // },
+  // defer:function(){
+  // },
+  // delay:function(){
+  // },
   // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // isArguments: function() {
 
+  // },
+  // isArray: function() {
 
+  // },
+  // isBoolean: function() {
+
+  // },
+  // isDate: function() {
+
+  // },
+  // isElement: function() {
+
+  // },
+  // isEmpty: function() {
+
+  // },
 
   property: function(propName) {
     return function(obj) {
