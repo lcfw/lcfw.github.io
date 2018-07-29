@@ -463,8 +463,14 @@ var lcfw = {
       return result
     }, {})
   },
-  // map:function(){
-  // },
+  map: function(collection, iteratee = identity) {
+    iteratee = this.iteratee(iteratee)
+    var result = []
+    for (var i in collection) {
+      result = [...result, iteratee(collection[i], i, collection)]
+    }
+    return result
+  },
   // orderBy:function(){
   // },
   // partition:function(){
