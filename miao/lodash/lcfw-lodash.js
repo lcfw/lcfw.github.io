@@ -251,9 +251,52 @@ var lcfw = {
     }
     return array.length - 1
   },
+  sortedIndex: function(array, value) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] >= value) {
+        return i
+      }
+    }
+    return array.length - 1
+  },
+  sortedIndexBy: function(array, value, iteratee = identity) {
+    iteratee = this.iteratee(iteratee)
+    for (var i in array) {
+      if (iteratee(value) >= iteratee(array[i]))
+        return i
+    }
+    return array.length - 1
+  },
+  // sortedLastIndex: function() {
 
+  // },
+  // sortedLastIndexBy: function() {
 
+  // },
+  // sortedLastIndexOf: function() {
 
+  // },
+  // sortedUniq: function() {
+
+  // },
+  // sortedUniqBy: function() {
+
+  // },
+  // tail: function() {
+
+  // },
+  // take: function() {
+
+  // },
+  // takeRight: function() {
+
+  // },
+  // takeRightWhile: function() {
+
+  // },
+  // takeWhile: function() {
+
+  // },
   union: function(...arrs) {
     arrs = [].concat(...arrs)
     return arrs.reduce((result, item) => {
