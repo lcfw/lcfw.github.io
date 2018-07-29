@@ -259,8 +259,20 @@ var lcfw = {
     }
     return array.length - 1
   },
-  sortedIndexOf: function() {
+  sortedIndexOf: function(array, value) {
+    var sma = 0
+    var big = array.length - 1
 
+    function bin(sma, big) {
+      var cha = Math.floor((sma + big) / 2)
+      array[cha] >= value ? big = cha : sma = cha
+      if (array[cha - 1] < value) {
+        return cha - 1
+      } else {
+        return bin(sma, big)
+      }
+    }
+    return bin(sma, big)
   },
   // sortedLastIndex: function() {
 
