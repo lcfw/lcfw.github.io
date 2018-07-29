@@ -503,18 +503,10 @@ var lcfw = {
   // 
   // 
   // 
-  // isArguments: function() {
-
-  // },
-  // isArray: function() {
-
-  // },
-  // isBoolean: function() {
-
-  // },
-  // isDate: function() {
-
-  // },
+  isArguments: value => Object.prototype.toString.call(value) === '[object Arguments]',
+  isArray: value => Array.isArray(value),
+  isBoolean: value => Object.prototype.toString.call(value) === '[object Boolean]',
+  isDate: value => Object.prototype.toString.call(value) === '[object Date]',
   // isElement: function() {
 
   // },
