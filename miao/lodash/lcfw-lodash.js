@@ -338,9 +338,8 @@ var lcfw = {
     return array.filter(item => !values.includes(item))
   },
   xor: function(...arys) {
-    return arys.reduce(function(result, item) {
-      return result = [...result, ...item.filter(item1 => !result.includes(item1))]
-    }, [])
+    arys = [].concat(...arys)
+    return arys.filter(item => arys.lastIndexOf(item) == arys.indexOf(item))
   },
   // xorBy: function() {
 
