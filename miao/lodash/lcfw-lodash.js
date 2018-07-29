@@ -453,9 +453,15 @@ var lcfw = {
   // zip: function() {
 
   // },
+  // zipobject: function() {
 
+  // },
+  // zipobjectdeep: function() {
 
+  // },
+  // zipwith: function() {
 
+  // },
   countBy: function(collection, iteratee = identity) {
     iteratee = this.iteratee(iteratee)
     return collection.reduce((result, item) => {
@@ -540,7 +546,8 @@ var lcfw = {
       }
     }
   },
-  // invokeMap:function(){
+  // invokeMap: function() {
+
   // },
   keyBy: function(collection, iteratee = identity) {
     iteratee = this.iteratee(iteratee)
@@ -558,43 +565,71 @@ var lcfw = {
     }
     return result
   },
-  // orderBy:function(){
+  // orderBy: function() {
+
   // },
-  // partition:function(){
+  // partition: function() {
+
   // },
-  // reduce:function(){
+  // reduce: function() {
+
   // },
-  // reduceRight:function(){
+  // reduceRight: function() {
+
   // },
-  // reject:function(){
+  // reject: function() {
+
   // },
-  // sample:function(){
+  // sample: function() {
+
   // },
-  // sampleSize:function(){
+  // sampleSize: function() {
+
   // },
-  // shuffle:function(){
+  // shuffle: function() {
+
   // },
-  // size:function(){
+  // size: function() {
+
   // },
-  // some:function(){
+  // some: function() {
+
   // },
-  // sortBy:function(){
+  // sortBy: function() {
+
   // },
-  // defer:function(){
+  // defer: function() {
+
   // },
-  // delay:function(){
+  // delay: function() {
+
   // },
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
+  // castArray: function() {
+
+  // },
+  // conformsTo: function() {
+
+  // },
+  // eq: function() {
+
+  // },
+  // gt: function() {
+
+  // },
+  // gte: function() {
+
+  // },
   isArguments: value => Object.prototype.toString.call(value) === '[object Arguments]',
   isArray: value => Array.isArray(value),
+  //isArrayBuffer: function() {
 
+  // },
+  // isArrayLike: function() {
 
+  // },
+  // isArrayLikeObject: function() {
 
+  // },
   isBoolean: value => Object.prototype.toString.call(value) === '[object Boolean]',
   isDate: value => Object.prototype.toString.call(value) === '[object Date]',
   // isElement: function() {
@@ -603,16 +638,149 @@ var lcfw = {
   // isEmpty: function() {
 
   // },
-
-  property: function(propName) {
-    return function(obj) {
-      return obj[propName]
+  isEqual: function(value, other) {
+    if (value === other) {
+      return true
+    } else if ((value !== value) && (other !== other)) {
+      return true
+    } else if (Array.isArray(value) && Array.isArray(other)) {
+      if (value.toString() === other.toString()) {
+        return true
+      }
+    } else if ((typeof value === 'object') && (typeof other === 'object')) {
+      if (Object.keys(value).length === Object.keys(other).length) {
+        for (item in value) {
+          if (!lcfw.isEqual(value[item], other[item])) {
+            return false
+          }
+        }
+        return true
+      }
     }
+    return false
   },
+  //isEqualWith: function() {
+
+  // },
+  isError: value => Object.prototype.toString.call(value) === "[object Error]",
+  //isFinite: function() {
+
+  // },
+  isFunction: value => Object.prototype.toString.call(value) === "[object Function]",
+  // isInteger: function() {
+
+  // },
+  // isLength: function() {
+
+  // },
+  // isMap: function() {
+
+  // },
+  // isMatch: function() {
+
+  // },
+  // isMatchWith: function() {
+
+  // },
+  // isNaN: function() {
+
+  // },
+  // isNative: function() {
+
+  // },
+  // isNil: function() {
+
+  // },
+  // isNull: function() {
+
+  // },
+  // isNumber: function() {
+
+  // },
+  // isObject: function() {
+
+  // },
+  // isObjectLike: function() {
+
+  // },
+  // isPlainObject: function() {
+
+  // },
+  // isRegExp: function() {
+
+  // },
+  // isSafeInteger: function() {
+
+  // },
+  // isSet: function() {
+
+  // },
+  isString: value => typeof value === 'string',
+  //isSymbol: function() {
+
+  // },
+  // isTypedArray: function() {
+
+  // },
+  isUndefined: value => Object.prototype.toString.call(value) === "[object Undefined]",
+  //isWeakMap: function() {
+
+  // },
+  //isWeakSet: function() {
+
+  //},
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  assign: function(object, ...obj) {
+    obj = Object.assign({}, ...obj)
+    for (var name in obj) {
+      if (obj.hasOwnProperty(name)) {
+        object[name] = typeof obj[name] === 'object' ? this.assign(object[name], obj[name]) : obj[name]
+      }
+    }
+    return object
+  },
+
+
+
+  add: (augend, addend) => augend + addend,
+  ceil: (number, precision = 0) => Math.ceil(number * (10 ** precision)) / (10 ** precision),
+  divide: (dividend, divisor) => dividend / divisor,
+  floor: (number, precision = 0) => Math.floor(number * (10 ** precision)) / (10 ** precision),
+  max: function(array) {
+    if (array.length != 0) {
+      array.reduce((result, item) => {
+        result > item ? result = item : result = result
+        return result
+      }, -Infinity)
+    }
+    return undefined
+  },
+  maxBy: function(array, iteratee = identity) {
+
+  },
+
+
+
+  sum: function() {
+
+  },
+  sumBy: function() {
+
+  },
+
+
+
   identity: function(v) {
     return v
   },
-
   iteratee: function(shorthand) {
     if (typeof shorthand === 'function') {
       return shorthand
@@ -639,56 +807,9 @@ var lcfw = {
       return value[shorthand[0]] == shorthand[1]
     }
   },
-
-
-  isEqual: function(value, other) {
-    if (value === other) {
-      return true
-    } else if ((value !== value) && (other !== other)) {
-      return true
-    } else if (Array.isArray(value) && Array.isArray(other)) {
-      if (value.toString() === other.toString()) {
-        return true
-      }
-    } else if ((typeof value === 'object') && (typeof other === 'object')) {
-      if (Object.keys(value).length === Object.keys(other).length) {
-        for (item in value) {
-          if (!lcfw.isEqual(value[item], other[item])) {
-            return false
-          }
-        }
-        return true
-      }
+  property: function(propName) {
+    return function(obj) {
+      return obj[propName]
     }
-    return false
-  },
-
-
-  isError: value =>
-    Object.prototype.toString.call(value) === "[object Error]",
-
-
-
-  isFunction: value =>
-    Object.prototype.toString.call(value) === "[object Function]",
-
-
-
-  isString: value => typeof value === 'string',
-
-
-
-  isUndefined: value =>
-    Object.prototype.toString.call(value) === "[object Undefined]",
-
-
-  assign: function(object, ...obj) {
-    obj = Object.assign({}, ...obj)
-    for (var name in obj) {
-      if (obj.hasOwnProperty(name)) {
-        object[name] = typeof obj[name] === 'object' ? this.assign(object[name], obj[name]) : obj[name]
-      }
-    }
-    return object
   },
 }
