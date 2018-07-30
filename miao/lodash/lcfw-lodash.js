@@ -568,9 +568,19 @@ var lcfw = {
   // orderBy: function() {
 
   // },
-  // partition: function() {
-
-  // },
+  partition: function(collection, predicate = identity) {
+    predicate = this.iteratee(predicate)
+    return collection.reduce((result, item) => {
+      if (predicate(item)) {
+        result[0] = result[0] || []
+        result[0].push(item)
+      } else {
+        result[1] = result[1] || []
+        result[1].push(item)
+      }
+      return result
+    }, [])
+  },
   // reduce: function() {
 
   // },
@@ -794,6 +804,78 @@ var lcfw = {
   identity: function(v) {
     return v
   },
+  //concat: function() {
+
+  //},
+  //pullAt: function() {
+
+  //},
+  matches: function(shorthand) {
+    return function(value) {
+      for (var item in shorthand) {
+        if (shorthand[item] !== value[item]) {
+          return false
+        }
+      }
+      return true
+    }
+  },
+  property: function(propName) {
+    return function(obj) {
+      return obj[propName]
+    }
+  },
+  //ary: function() {
+
+  //},
+  //unary: function() {
+
+  //},
+  //negate: function() {
+
+  //},
+  //once: function() {
+
+  //},
+  //spread: function() {
+
+  //},
+  //curry: function() {
+
+  //},
+  //memoize: function() {
+
+  //},
+  //flip: function() {
+
+  //},
+  //conforms: function() {
+
+  //},
+  //constant: function() {
+
+  //},
+  //flow: function() {
+
+  //},
+  //method: function() {
+
+  //},
+  //methodOf: function() {
+
+  //},
+  //nthArg: function() {
+
+  //},
+  //propertyOf: function() {
+
+  //},
+  //parseJson: function() {
+
+  //},
+
+
+
   iteratee: function(shorthand) {
     if (typeof shorthand === 'function') {
       return shorthand
@@ -805,24 +887,9 @@ var lcfw = {
       return this.matches(shorthand)
     }
   },
-  matches: function(shorthand) {
-    return function(value) {
-      for (var item in shorthand) {
-        if (shorthand[item] !== value[item]) {
-          return false
-        }
-      }
-      return true
-    }
-  },
   matchesProperty: function(shorthand) {
     return function(value) {
       return value[shorthand[0]] == shorthand[1]
-    }
-  },
-  property: function(propName) {
-    return function(obj) {
-      return obj[propName]
     }
   },
 }
