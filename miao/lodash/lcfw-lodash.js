@@ -466,17 +466,28 @@ var lcfw = {
       return i
     })
   },
-  zipobject: function(props, value) {
+  zipObject: function(props, value) {
     var res = {}
     props.forEach((item, index) => res[item] = value[index])
     return res
   },
-  // zipobjectdeep: function() {
+  // zipObjectDeep: function() {
 
   // },
-  // zipwith: function() {
-
-  // },
+  zipWith: function(...arr) {
+    arr = [...arr]
+    if ((typeof arrs[arrs.length - 1]) === 'string') {
+      iteratee = this.property(arrs.pop())
+    } else if (typeof arrs[arrs.length - 1] === 'function') {
+      iteratee = arrs.pop()
+    } else {
+      iteratee = this.identity
+    }
+    var result = this.zip(array)
+    return result.map(item => {
+      return item.reduce((res, it) => iteratee(res, it))
+    })
+  },
   countBy: function(collection, iteratee = identity) {
     iteratee = this.iteratee(iteratee)
     return collection.reduce((result, item) => {
