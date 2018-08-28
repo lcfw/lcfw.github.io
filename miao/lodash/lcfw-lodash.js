@@ -410,12 +410,20 @@ var lcfw = {
       return result
     }, ary)
   },
-  // unzip: function() {
-
-  // },
-  // unzipWith: function() {
-
-  // },
+  unzip: function(array) {
+    var result = Array(array[0].length).fill(0).map(it => [])
+    return result.map((i, index) => {
+      array.forEach(item => i.push(item[index]))
+      return i
+    })
+  },
+  unzipWith: function(array, iteratee = identity) {
+    iteratee = this.iteratee(iteratee)
+    var result = this.unzip(array)
+    return result.map(item => {
+      return item.reduce((res, it) => iteratee(res, it))
+    })
+  },
   without: function(array, ...values) {
     values = [...values]
     return array.filter(item => !values.includes(item))
