@@ -458,12 +458,19 @@ var lcfw = {
     }
     return result
   },
-  // zip: function() {
-
-  // },
-  // zipobject: function() {
-
-  // },
+  zip: function(...array) {
+    var array = [...array]
+    var result = Array(array[0].length).fill(0).map(it => [])
+    return result.map((i, index) => {
+      array.forEach(item => i.push(item[index]))
+      return i
+    })
+  },
+  zipobject: function(props, value) {
+    var res = {}
+    props.forEach((item, index) => res[item] = value[index])
+    return res
+  },
   // zipobjectdeep: function() {
 
   // },
