@@ -475,7 +475,7 @@ var lcfw = {
 
   // },
   zipWith: function(...arr) {
-    arr = [...arr]
+    var arrs = [...arr]
     if ((typeof arrs[arrs.length - 1]) === 'string') {
       iteratee = this.property(arrs.pop())
     } else if (typeof arrs[arrs.length - 1] === 'function') {
@@ -483,7 +483,7 @@ var lcfw = {
     } else {
       iteratee = this.identity
     }
-    var result = this.zip(array)
+    var result = this.zip(arrs)
     return result.map(item => {
       return item.reduce((res, it) => iteratee(res, it))
     })
@@ -572,9 +572,12 @@ var lcfw = {
       }
     }
   },
-  // invokeMap: function() {
-
-  // },
+  invokeMap: function(collection, path, ...args) {
+    if (typeof path == "string") {
+      path = collection[0][path]
+    }
+    return collection.map(item => path.call(item, ...args))
+  },
   keyBy: function(collection, iteratee = identity) {
     iteratee = this.iteratee(iteratee)
     return collection.reduce((result, item) => {
