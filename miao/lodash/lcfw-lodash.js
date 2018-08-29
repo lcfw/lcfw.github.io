@@ -778,10 +778,11 @@ var lcfw = {
   //
   //
   assign: function(object, ...obj) {
-    obj = Object.assign({}, ...obj)
-    for (var name in obj) {
-      if (obj.hasOwnProperty(name)) {
-        object[name] = typeof obj[name] === 'object' ? this.assign(object[name], obj[name]) : obj[name]
+    for (var item of obj) {
+      for (var name in item) {
+        if (obj.hasOwnProperty(name)) {
+          object[name] = item[name]
+        }
       }
     }
     return object
@@ -829,7 +830,48 @@ var lcfw = {
     }, 0)
   },
 
+  // forOwn: function() {
 
+  // },
+  // forOwnRight: function() {
+
+  // },
+
+  merge: function(object, ...sources) {
+    for (var obj of sources) {
+      for (var key in obj) {
+        if (Array.isArray(obj[item]) || Object.prototype.toString().call(obj[item]) === '[object Function]') {
+          if (object[item]) {
+            object[item] = merge(object[item], obj[item])
+          } else {
+            object[item] = merge({}, obj[item])
+          }
+        } else {
+          object[item] = obj[item]
+        }
+      }
+    }
+    return object
+  },
+
+  cloneDeep: function(value) {
+    if (Array.isArray(value)) {
+      var result = []
+      for (var key in value) {
+        result[key] = cloneDeep(value[key])
+      }
+    } else if (Object.prototype.toString().call(value)) {
+      var result = {}
+      for (var key in value) {
+        result[key] = cloneDeep(value[key])
+      }
+    } else if (isRegExp(value)) {
+      var result = new RegExp(value)
+    } else {
+      var result = value
+    }
+    return result
+  },
   identity: function(v) {
     return v
   },
